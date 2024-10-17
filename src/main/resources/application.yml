@@ -1,0 +1,32 @@
+server:
+  port: 8181
+
+spring:
+  application:
+    name: jpa
+  datasource:
+    url: jdbc:mysql://localhost:3306/jpa?serverTimezone=Asia/Seoul
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+#    properties:
+#      hibernate:
+#        format_sql: true
+
+# log level setting
+logging:
+  level:
+    root: info
+    com:
+      spring:
+        jpa: debug
+    org:
+      hibernate:
+        SQL: debug
+
+
