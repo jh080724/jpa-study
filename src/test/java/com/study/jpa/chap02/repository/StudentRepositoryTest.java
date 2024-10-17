@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -14,12 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
+@Rollback(false)
 class StudentRepositoryTest {
 
     @Autowired
     StudentRepository studentRepository;
 
-    @BeforeEach
+//    @BeforeEach
+    @Test
     void insertData() {
         Student s1 = Student.builder()
                 .name("쿠로미")
@@ -72,5 +75,51 @@ class StudentRepositoryTest {
         System.out.println("[dbg]\n\n\n\n");
         System.out.println("[dbg] " + students.get(0));
         System.out.println("[dbg]\n\n\n\n");
+    }
+
+    @Test
+    @DisplayName("도시 또는 이름으로 학생 조회")
+    void nativeSqlTest() {
+        // given
+        String name = "춘식이";
+        String city = "제주도";
+
+        // when
+        List<Student> students = studentRepository.getStudentByNameOrCity(name, city);
+
+
+        // then
+        System.out.println("[dbg]\n\n\n\n");
+        students.forEach(stu -> System.out.println("[dbg]"+stu));
+        System.out.println("[dbg]\n\n\n\n");
+    }
+
+    @Test
+    @DisplayName("JPQL로 이름이 포함된 학생 목록 조회하기")
+    void jpqlTest() {
+        // given
+        String name="춘";
+
+        // when
+        List<Student> students = studentRepository.searchByNameWithJPQL(name);
+
+        // then
+        System.out.println("[dbg]\n\n\n\n");
+        students.forEach(stu -> System.out.println("[dbg]"+stu));
+        System.out.println("[dbg]\n\n\n\n");
+    }
+
+    @Test
+    @DisplayName("JPQL로 삭제하기")
+    void deleteJPQLTest() {
+        // given
+        String name = "어피치";
+        String city = "제주도";
+
+        // when
+        studentRepository.deleteByNameAndCityWithJPQL(name, city);
+
+        // then
+        assertEquals(0, studentRepository.findByName(name).size());
     }
 }
