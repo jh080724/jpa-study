@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-@Setter
-@Getter
-@ToString
+@Setter @Getter @ToString
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "tbl_student")
 public class Student {
+
     @Id
     @Column(name = "stu_id")
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -26,4 +25,15 @@ public class Student {
     private String city;
 
     private String major;
+
 }
+
+
+
+
+
+
+
+
+
+

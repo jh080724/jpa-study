@@ -21,7 +21,7 @@ class StudentRepositoryTest {
     @Autowired
     StudentRepository studentRepository;
 
-//    @BeforeEach
+    //    @BeforeEach
     @Test
     void insertData() {
         Student s1 = Student.builder()
@@ -62,7 +62,7 @@ class StudentRepositoryTest {
     }
 
     @Test
-    @DisplayName("여러가지 조건을 쿼리 메서드로 검색")
+    @DisplayName("여러가지 조건을 쿼리메서드로 검색")
     void queryMethodTest() {
         // given
         String city = "제주도";
@@ -72,14 +72,14 @@ class StudentRepositoryTest {
         List<Student> students = studentRepository.findByMajorEndingWith(major);
 
         // then
-        System.out.println("[dbg]\n\n\n\n");
-        System.out.println("[dbg] " + students.get(0));
-        System.out.println("[dbg]\n\n\n\n");
+        System.out.println("\n\n\n\n");
+        System.out.println(students.get(0));
+        System.out.println("\n\n\n\n");
     }
 
     @Test
     @DisplayName("도시 또는 이름으로 학생 조회")
-    void nativeSqlTest() {
+    void nativeSQLTest() {
         // given
         String name = "춘식이";
         String city = "제주도";
@@ -87,26 +87,25 @@ class StudentRepositoryTest {
         // when
         List<Student> students = studentRepository.getStudentByNameOrCity(name, city);
 
-
         // then
-        System.out.println("[dbg]\n\n\n\n");
-        students.forEach(stu -> System.out.println("[dbg]"+stu));
-        System.out.println("[dbg]\n\n\n\n");
+        System.out.println("\n\n\n\n");
+        students.forEach(stu -> System.out.println(stu));
+        System.out.println("\n\n\n\n");
     }
 
     @Test
     @DisplayName("JPQL로 이름이 포함된 학생 목록 조회하기")
     void jpqlTest() {
         // given
-        String name="춘";
+        String name = "춘";
 
         // when
         List<Student> students = studentRepository.searchByNameWithJPQL(name);
 
         // then
-        System.out.println("[dbg]\n\n\n\n");
-        students.forEach(stu -> System.out.println("[dbg]"+stu));
-        System.out.println("[dbg]\n\n\n\n");
+        System.out.println("\n\n\n\n");
+        students.forEach(stu -> System.out.println(stu));
+        System.out.println("\n\n\n\n");
     }
 
     @Test
@@ -122,4 +121,15 @@ class StudentRepositoryTest {
         // then
         assertEquals(0, studentRepository.findByName(name).size());
     }
+
+
 }
+
+
+
+
+
+
+
+
+
