@@ -34,7 +34,7 @@ class QueryDSLBasicTest {
 
     @Autowired
     EntityManager em;
-
+/*
     @Test
     void setUp() {
         //given
@@ -51,7 +51,7 @@ class QueryDSLBasicTest {
         idolRepository.save(idol3);
         idolRepository.save(idol4);
     }
-
+*/
     @Test
     @DisplayName("JPQL로 특정이름의 아이돌 조회하기")
     void jpqlTest() {
